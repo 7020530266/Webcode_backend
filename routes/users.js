@@ -117,7 +117,7 @@ router.post('/reset-password', async(req,res)=>{
        <h2>Hello ${user.email}</h2>
        <p>We've recieved a request to reset the password for your account associated with your email.
        You can reset your password by clicking the link below</p>
-       <a href=https://webcde-backend.onrender.com/users/update-password/${token}> Reset Password</a>
+       <a href=http://localhost:8000/users/update-password/${token}> Reset Password</a>
        <p><b>Note:</b>The link expires 15 minutes from now</p>
       </div>`,
       };
@@ -147,7 +147,9 @@ router.post('/reset-password', async(req,res)=>{
 
 router.get('/update-password/:token', async(req,res,next)=>{
  const {token} =req.params
+ console.log(token,"1")
   try{
+    
     res.render("update-password")}
   catch(error)
   { console.log(error);
@@ -220,15 +222,15 @@ console.log(email)
     })
 
     router.get("/adminRoleAuth", async (req, res,next) => {
-      let email1 =emailStorageAdmin[(emailStorageAdmin.length)-1]
-      console.log(email1)
+      let email1 =emailStorage[(emailStorage.length)-1]
+      // console.log(email1,"2")
       await client.connect();
     try{
       const db = client.db(dbName);
       let user = await db.collection("users").findOne({email:email1});
-      console.log(user)
+      // console.log(user,"3")
       let roleVerify =user.role
-      console.log(roleVerify)
+      // console.log(roleVerify,"4")
       res.send({
         statusCode:200,
         data:roleVerify
